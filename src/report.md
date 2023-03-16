@@ -290,6 +290,17 @@ iptables -X
 <img src="../misc/images/part5_network.png" alt="part5_network" width="500"/>
 
 ##### Поднять пять виртуальных машин (3 рабочие станции (ws11, ws21, ws22) и 2 роутера (r1, r2))
+> Для каждой машины в VirtualBox настраиваем сетевые соединения, запускаем и изменяем имя хоста на соответствующие при помощи команды `sudo hostnamectl set-hostname <hostnamename>` и `sudo reboot`.
+> - r1
+>   - ![part1](./images/r1.png)
+> - r2
+>   - ![part1](./images/r2.png)
+> - ws11
+>   - ![part1](./images/ws11.png)
+> - ws22
+>   - ![part1](./images/ws22.png)
+> - ws21
+>   - ![part1](./images/ws21.png)
 
 #### 5.1. Настройка адресов машин
 ##### Настроить конфигурации машин в *etc/netplan/00-installer-config.yaml* согласно сети на рисунке.
