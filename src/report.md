@@ -475,15 +475,36 @@ subnet 10.20.0.0 netmask 255.255.255.192
     option domain-name-servers 10.20.0.1;
 }
 ```
+> - для начала скачаем isc-dhcp-server командой `sudo apt install isc-dhcp-server`(предварительно пошамнив с gateway)
+> - `sudo nano /etc/dhcp/dhcpd.conf`
+>   - ![part1](./images/6_task/dhcp_r2.png)
 ##### 2) в файле *resolv.conf* прописать `nameserver 8.8.8.8.`
 - В отчёт поместить скрины с содержанием изменённых файлов.
+> - `sudo nano /etc/resolv.conf`
+>   - ![part1](./images/6_task/resolv_r2.png)
 ##### Перезагрузить службу **DHCP** командой `systemctl restart isc-dhcp-server`. Машину ws21 перезагрузить при помощи `reboot` и через `ip a` показать, что она получила адрес. Также пропинговать ws22 с ws21.
 - В отчёт поместить скрины с вызовом и выводом использованных команд.
-
+> - `systemctl restart isc-dhcp-server` 
+>   - ![part1](./images/6_task/restart_dhcp_r2.png)
+> - `ip a`
+>   - ![part1](./images/6_task/ipa_ws21.png)
+> - `ping -c 5 10.20.0.2`
+>   - ![part1](./images/6_task/pingws22.png)
 ##### Указать MAC адрес у ws11, для этого в *etc/netplan/00-installer-config.yaml* надо добавить строки: `macaddress: 10:10:10:10:10:BA`, `dhcp4: true`
+>   - ![part1](./images/6_task/macws11.png)
 - В отчёт поместить скрин с содержанием изменённого файла *etc/netplan/00-installer-config.yaml*.
 ##### Для r1 настроить аналогично r2, но сделать выдачу адресов с жесткой привязкой к MAC-адресу (ws11). Провести аналогичные тесты
 - В отчёте этот пункт описать аналогично настройке для r2.
+> - `sudo nano /etc/dhcp/dhcpd.conf`
+>   - ![part1](./images/6_task/dhcpr1.png)
+> - `sudo nano /etc/resolv.conf`
+>   - ![part1](./images/6_task/resolvr1.png)
+> - `systemctl restart isc-dhcp-server` 
+>   - ![part1](./images/6_task/sysr1.png)
+> - `ip a`
+>   - ![part1](./images/6_task/ipa_ws11.png)
+<!-- > - `ping -c 5 10.20.0.2`
+>   - ![part1](./images/6_task/pingws22.png) -->
 ##### Запросить с ws21 обновление ip адреса
 - В отчёте поместить скрины ip до и после обновления.
 - В отчёте описать, какими опциями **DHCP** сервера пользовались в данном пункте.
