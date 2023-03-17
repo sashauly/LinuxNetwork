@@ -356,10 +356,6 @@ default via 10.10.0.1 dev eth0
 ```
 ##### Настроить маршрут по-умолчанию (шлюз) для рабочих станций. Для этого добавить `default` перед IP роутера в файле конфигураций
 - В отчёт поместить скрин с содержанием файла *etc/netplan/00-installer-config.yaml*.
-> - r1
->   - ![part1](./images/5_task/gateway_r1.png)
-> - r2
->   - ![part1](./images/5_task/gateway_r2.png)
 > - ws11
 >   - ![part1](./images/5_task/gateway_ws11.png)
 > - ws22
@@ -368,10 +364,6 @@ default via 10.10.0.1 dev eth0
 >   - ![part1](./images/5_task/gateway_ws21.png)
 ##### Вызвать `ip r` и показать, что добавился маршрут в таблицу маршрутизации
 - В отчёт поместить скрин с вызовом и выводом использованной команды.
-> - r1
->   - ![part1](./images/5_task/ipr_r1.png)
-> - r2
->   - ![part1](./images/5_task/ipr_r2.png)
 > - ws11
 >   - ![part1](./images/5_task/ipr_ws11.png)
 > - ws22
@@ -501,13 +493,17 @@ subnet 10.20.0.0 netmask 255.255.255.192
 >   - ![part1](./images/6_task/resolvr1.png)
 > - `systemctl restart isc-dhcp-server` 
 >   - ![part1](./images/6_task/sysr1.png)
-> - `ip a`
->   - ![part1](./images/6_task/ipa_ws11.png)
-<!-- > - `ping -c 5 10.20.0.2`
->   - ![part1](./images/6_task/pingws22.png) -->
+
 ##### Запросить с ws21 обновление ip адреса
 - В отчёте поместить скрины ip до и после обновления.
+> - "Убиваем" старый адрес `sudo dhclient -r enp0s8`
+> - Смотрим `ip a`
+>   - ![part1](./images/6_task/ipa_ws111.png)
+> - Запрашиваем новый IP `sudo dhclient enp0s8`
+> - Смотрим `ip a`
+>   - ![part1](./images/6_task/ipa_ws112.png)
 - В отчёте описать, какими опциями **DHCP** сервера пользовались в данном пункте.
+> Команда `sudo dhclient -r enp0s8` освобождает текущий адрес интерфейса enp0s8. Команда `sudo dhclient enp0s8` задает новый адрес указанному интерфейсу.
 
 ##### Сохранить дампы образов виртуальных машин
 **p.s. Ни в коем случае не сохранять дампы в гит!**
