@@ -106,26 +106,26 @@
 **== Задание ==**
 
 ##### Поднять две виртуальные машины (далее -- ws1 и ws2)
-> ![part1](./images/2_task/2.png)
+> ![part2](./images/2_task/2.png)
 > 
 > Склонируем первую машину(ws1) в VirtualBox.
 > На второй машине установим имя хоста ws2 и перезагрузим для отображения изменений:
 >  - `sudo hostnamectl set-hostname ws2`
 >  - `sudo reboot`
 > - Настраиваем локальное соединение на обеих машинах через VirtualBox.
-![part1](./images/3_task/3.2ad2.png)
+![part2](./images/3_task/3.2ad2.png)
 ##### С помощью команды `ip a` посмотреть существующие сетевые интерфейсы
 - В отчёт поместить скрин с вызовом и выводом использованной команды.
 - ws1
-  > ![part1](./images/2_task/2_ip_a.png)
+  > ![part2](./images/2_task/2_ip_a.png)
 - ws2
-  >![part1](./images/2_task/2_ip_a_2.png)
+  >![part2](./images/2_task/2_ip_a_2.png)
 ##### Описать сетевой интерфейс, соответствующий внутренней сети, на обеих машинах и задать следующие адреса и маски: ws1 - *192.168.100.10*, маска */16*, ws2 - *172.24.116.8*, маска */12*
 ##### В отчёт поместить скрины с содержанием изменённого файла *etc/netplan/00-installer-config.yaml* для каждой машины. Выполнить команду `netplan apply` для перезапуска сервиса сети. В отчёт поместить скрин с вызовом и выводом использованной команды.
 - ws1
-  > ![part1](./images/2_task/yaml_ws1.png)
+  > ![part2](./images/2_task/yaml_ws1.png)
 - ws2
-  > ![part1](./images/2_task/yaml_ws2.png)
+  > ![part2](./images/2_task/yaml_ws2.png)
 
 
 #### 2.1. Добавление статического маршрута вручную
@@ -137,13 +137,13 @@
   > 
   > `ping 172.24.116.8`
   >
-  > ![part1](./images/2_task/2.1_ws1.png)
+  > ![part2](./images/2_task/2.1_ws1.png)
 - ws2
   > `sudo ip r add 192.168.100.10 dev enp0s3`
   > 
   > `ping 192.168.100.10`
   >
-  > ![part1](./images/2_task/2.1_ws2.png)
+  > ![part2](./images/2_task/2.1_ws2.png)
 
 #### 2.2. Добавление статического маршрута с сохранением
 ##### Перезапустить машины
@@ -151,17 +151,17 @@
 ##### Добавить статический маршрут от одной машины до другой с помощью файла *etc/netplan/00-installer-config.yaml*
 - В отчёт поместить скрин с содержанием изменённого файла *etc/netplan/00-installer-config.yaml*.
 - ws1
-  > ![part1](./images/2_task/2.2_ws1.png)
+  > ![part2](./images/2_task/2.2_ws1.png)
 - ws2
-  > ![part1](./images/2_task/2.2_ws2.png)
+  > ![part2](./images/2_task/2.2_ws2.png)
 ##### Пропинговать соединение между машинами
 - В отчёт поместить скрин с вызовом и выводом использованной команды.
 - ws1
   > `ping -c 4 172.24.116.8`
-  > ![part1](./images/2_task/2.2ping1.png)
+  > ![part2](./images/2_task/2.2ping1.png)
 - ws2
   > `ping -c 4 192.168.100.10`
-  > ![part1](./images/2_task/2.2ping2.png)
+  > ![part2](./images/2_task/2.2ping2.png)
 
 ## Part 3. Утилита **iperf3**
 
@@ -186,14 +186,14 @@
 >   - iperf3 -c server [ options ]
 ##### Измерить скорость соединения между ws1 и ws2
 > Для измерения скорости необходимо скачать утилиту iperf3 из Интернета, а сейчас у нас включена только локальное соединение между двумя машинами. Поэтому в настройках сети для каждой машины выставляем первый Adapter 1 *NAS*, а Adapter 2 - Internal Network(локальная сеть).
-> ![part1](./images/3_task/3.2ad1.png)
-> ![part1](./images/3_task/3.2ad2.png)
+> ![part3](./images/3_task/3.2ad1.png)
+> ![part3](./images/3_task/3.2ad2.png)
 >
 > Далее необходимо скорректировать yaml файлы на обеих машинах для настройки нужного порта enp0s8.
 > - ws1
-> ![part1](./images/3_task/3.2yaml1.png)
+> ![part3](./images/3_task/3.2yaml1.png)
 > - ws2
-> ![part1](./images/3_task/3.2yaml2.png)
+> ![part3](./images/3_task/3.2yaml2.png)
 >
 > Теперь устанавливаем на обе машины утилиту iperf3
 > - `sudo apt install iperf3`
@@ -201,11 +201,11 @@
 > - ws1
 > 
 >   `iperf -s`
-> ![part1](./images/3_task/3.2i1.png)
+> ![part3](./images/3_task/3.2i1.png)
 > - ws2
 > 
 >   `iperf -c 192.168.100.10`
-> ![part1](./images/3_task/3.2i2.png)
+> ![part3](./images/3_task/3.2i2.png)
 
 ## Part 4. Сетевой экран
 
@@ -214,7 +214,7 @@
 *В данном задании используются виртуальные машины ws1 и ws2 из Части 2*
 
 #### 4.1. Утилита **iptables**
-> Мануал `iptables` можно прочесть [здесь](https://www.opennet.ru/man.shtml?topic=iptables&category=8&russian=0).
+> Мануал `iptables` можно прочесть [здесь](https://www.opennet.ru/man.shtml?topic=iptables&category=8&russian=0). Более подробная информация есть [здесь](https://losst.pro/nastrojka-iptables-dlya-chajnikov).
 > - **Описание `iptables`**
 >   - `iptables` используется для установки, настройки и просмотра таблиц правил фильтрации IP-пакетов в ядре Linux.
 Каждая таблица содержит несколько предопределённых цепочек и может содержать цепочки, определённые пользователем. Каждая цепочка - это список правил, которые могут воздействовать на множество пакетов. Каждое правило определяет, какие действие произвести с пакетами, на которые оно действует. Эти действия называются целью, целью может быть и переход на другую (определённую пользователем) цепочку в этой же таблице. Правило брандмауэра (межсетевого экрана) определяет критерии для пакета и цели. Если пакет не попадает под действие правила, проверяется следующее правило в цепочке; если попадает - проверяется правило, указанное в цели, которая может быть именем новой цепочки или одно из специальных целей: ACCEPT, DROP, QUEUE или RETURN.
@@ -247,15 +247,15 @@ iptables -X
 ##### 5) разрешить *echo reply* (машина должна "пинговаться")
 - В отчёт поместить скрины с содержанием файла */etc/firewall* для каждой машины.
 > - ws1 
-  ![part1](./images/4_task/4.11.png)
+  ![part4](./images/4_task/4.11.png)
 > - ws2
-  ![part1](./images/4_task/4.12.png)
+  ![part4](./images/4_task/4.12.png)
 ##### Запустить файлы на обеих машинах командами `chmod +x /etc/firewall.sh` и `/etc/firewall.sh`
 - В отчёт поместить скрины с запуском обоих файлов.
 > - ws1 
-  ![part1](./images/4_task/411.png)
+  ![part4](./images/4_task/411.png)
 > - ws2
-  ![part1](./images/4_task/412.png)
+  ![part4](./images/4_task/412.png)
 - В отчёте описать разницу между стратегиями, применёнными в первом и втором файлах.
 > Разница между стратегиями заключается в том, что в первом файле первым подходящим правилом для пакета является запрет, а во втором - разрешение. Применяется только первое подходящее правило, остальные игнорируются.
 
@@ -268,15 +268,15 @@ iptables -X
 > - ws1
 > 
 >   - `ping -c 5 172.24.116.8`
->   ![part1](./images/4_task/4.21.png)
+>   ![part4](./images/4_task/4.21.png)
 >   - `sudo nmap 172.24.116.8`
->   ![part1](./images/4_task/4.22.png)
+>   ![part4](./images/4_task/4.22.png)
 
 > - ws2
 >   - `ping -c 5 192.168.100.10`
->   ![part1](./images/4_task/421.png)
+>   ![part4](./images/4_task/421.png)
 >   - `sudo nmap 192.168.100.10`
->   ![part1](./images/4_task/422.png)
+>   ![part4](./images/4_task/422.png)
 
 ##### Сохранить дампы образов виртуальных машин
 **p.s. Ни в коем случае не сохранять дампы в гит!**
@@ -292,46 +292,46 @@ iptables -X
 ##### Поднять пять виртуальных машин (3 рабочие станции (ws11, ws21, ws22) и 2 роутера (r1, r2))
 > Для каждой машины в VirtualBox настраиваем сетевые соединения, запускаем и изменяем имя хоста на соответствующие при помощи команды `sudo hostnamectl set-hostname <hostnamename>` и `sudo reboot`.
 > - r1
->   - ![part1](./images/5_task/r1.png)
+>   - ![part5](./images/5_task/r1.png)
 > - r2
->   - ![part1](./images/5_task/r2.png)
+>   - ![part5](./images/5_task/r2.png)
 > - ws11
->   - ![part1](./images/5_task/ws11.png)
+>   - ![part5](./images/5_task/ws11.png)
 > - ws22
->   - ![part1](./images/5_task/ws22.png)
+>   - ![part5](./images/5_task/ws22.png)
 > - ws21
->   - ![part1](./images/5_task/ws21.png)
+>   - ![part5](./images/5_task/ws21.png)
 
 #### 5.1. Настройка адресов машин
 ##### Настроить конфигурации машин в *etc/netplan/00-installer-config.yaml* согласно сети на рисунке.
 - В отчёт поместить скрины с содержанием файла *etc/netplan/00-installer-config.yaml* для каждой машины.
 > - r1
->   - ![part1](./images/5_task/r11.png)
+>   - ![part5](./images/5_task/r11.png)
 > - r2
->   - ![part1](./images/5_task/r21.png)
+>   - ![part5](./images/5_task/r21.png)
 > - ws11
->   - ![part1](./images/5_task/ws111.png)
+>   - ![part5](./images/5_task/ws111.png)
 > - ws22
->   - ![part1](./images/5_task/ws221.png)
+>   - ![part5](./images/5_task/ws221.png)
 > - ws21
->   - ![part1](./images/5_task/ws211.png)
+>   - ![part5](./images/5_task/ws211.png)
 ##### Перезапустить сервис сети. Если ошибок нет, то командой `ip -4 a` проверить, что адрес машины задан верно. Также пропинговать ws22 с ws21. Аналогично пропинговать r1 с ws11.
 - В отчёт поместить скрины с вызовом и выводом использованных команд.
 > - r1
->   - ![part1](./images/5_task/r12.png)
+>   - ![part5](./images/5_task/r12.png)
 > - r2
->   - ![part1](./images/5_task/r22.png)
+>   - ![part5](./images/5_task/r22.png)
 > - ws11
->   - ![part1](./images/5_task/ws112.png)
+>   - ![part5](./images/5_task/ws112.png)
 > - ws22
->   - ![part1](./images/5_task/ws222.png)
+>   - ![part5](./images/5_task/ws222.png)
 > - ws21
->   - ![part1](./images/5_task/ws212.png)
+>   - ![part5](./images/5_task/ws212.png)
 >
 > - Пинг ws22 с ws21 `ping -c 5 10.20.0.20`
->   - ![part1](./images/5_task/ws22ws21.png)
+>   - ![part5](./images/5_task/ws22ws21.png)
 > - Пинг r1 с ws11 `ping -c 5 10.10.0.1`
->   - ![part1](./images/5_task/r1ws11.png)
+>   - ![part5](./images/5_task/r1ws11.png)
 
 #### 5.2. Включение переадресации IP-адресов.
 ##### Для включения переадресации IP, выполните команду на роутерах:
@@ -339,14 +339,14 @@ iptables -X
 *При таком подходе переадресация не будет работать после перезагрузки системы.*
 - В отчёт поместить скрин с вызовом и выводом использованной команды.
 > - r1
->   - ![part1](./images/5_task/r1sys.png)
+>   - ![part5](./images/5_task/r1sys.png)
 > - r2
->   - ![part1](./images/5_task/r2sys.png)
+>   - ![part5](./images/5_task/r2sys.png)
 ##### Откройте файл */etc/sysctl.conf* и добавьте в него следующую строку:
 `net.ipv4.ip_forward = 1`
 *При использовании этого подхода, IP-переадресация включена на постоянной основе.*
 - В отчёт поместить скрин с содержанием изменённого файла */etc/sysctl.conf*.
->   - ![part1](./images/5_task/r1r2conf.png)
+>   - ![part5](./images/5_task/r1r2conf.png)
 
 #### 5.3. Установка маршрута по-умолчанию
 Пример вывода команды `ip r` после добавления шлюза:
@@ -357,26 +357,26 @@ default via 10.10.0.1 dev eth0
 ##### Настроить маршрут по-умолчанию (шлюз) для рабочих станций. Для этого добавить `default` перед IP роутера в файле конфигураций
 - В отчёт поместить скрин с содержанием файла *etc/netplan/00-installer-config.yaml*.
 > - ws11
->   - ![part1](./images/5_task/gateway_ws11.png)
+>   - ![part5](./images/5_task/gateway_ws11.png)
 > - ws22
->   - ![part1](./images/5_task/gateway_ws22.png)
+>   - ![part5](./images/5_task/gateway_ws22.png)
 > - ws21
->   - ![part1](./images/5_task/gateway_ws21.png)
+>   - ![part5](./images/5_task/gateway_ws21.png)
 ##### Вызвать `ip r` и показать, что добавился маршрут в таблицу маршрутизации
 - В отчёт поместить скрин с вызовом и выводом использованной команды.
 > - ws11
->   - ![part1](./images/5_task/ipr_ws11.png)
+>   - ![part5](./images/5_task/ipr_ws11.png)
 > - ws22
->   - ![part1](./images/5_task/ipr_ws22.png)
+>   - ![part5](./images/5_task/ipr_ws22.png)
 > - ws21
->   - ![part1](./images/5_task/ipr_ws21.png)
+>   - ![part5](./images/5_task/ipr_ws21.png)
 ##### Пропинговать с ws11 роутер r2 и показать на r2, что пинг доходит. Для этого использовать команду:
 `tcpdump -tn -i eth1`
 - В отчёт поместить скрин с вызовом и выводом использованных команд.
 > - ws11
->   - ![part1](./images/5_task/ws1_ping_r2.png)
+>   - ![part5](./images/5_task/ws1_ping_r2.png)
 > - r2
->   - ![part1](./images/5_task/r2_listen.png)
+>   - ![part5](./images/5_task/r2_listen.png)
 
 #### 5.4. Добавление статических маршрутов
 ##### Добавить в роутеры r1 и r2 статические маршруты в файле конфигураций. Пример для r1 маршрута в сетку 10.20.0.0/26:
@@ -387,9 +387,9 @@ default via 10.10.0.1 dev eth0
 ```
 - В отчёт поместить скрины с содержанием изменённого файла *etc/netplan/00-installer-config.yaml* для каждого роутера.
 > - r1
->   - ![part1](./images/5_task/routes-r1.png)
+>   - ![part5](./images/5_task/routes-r1.png)
 > - r2
->   - ![part1](./images/5_task/routes-r2.png)
+>   - ![part5](./images/5_task/routes-r2.png)
 ##### Вызвать `ip r` и показать таблицы с маршрутами на обоих роутерах. Пример таблицы на r1:
 ```
 10.100.0.0/16 dev eth1 proto kernel scope link src 10.100.0.11
@@ -398,14 +398,14 @@ default via 10.10.0.1 dev eth0
 ```
 - В отчёт поместить скрин с вызовом и выводом использованной команды.
 > - r1
->   - ![part1](./images/5_task/ipr_routes_r1.png)
+>   - ![part5](./images/5_task/ipr_routes_r1.png)
 > - r2
->   - ![part1](./images/5_task/ipr_routes_r2.png)
+>   - ![part5](./images/5_task/ipr_routes_r2.png)
 ##### Запустить команды на ws11:
 `ip r list 10.10.0.0/[маска сети]` и `ip r list 0.0.0.0/0`
 - В отчёт поместить скрин с вызовом и выводом использованных команд.
 > - ws11
->   - ![part1](./images/5_task/ipr_routes_ws11.png)
+>   - ![part5](./images/5_task/ipr_routes_ws11.png)
 - В отчёте объяснить, почему для адреса 10.10.0.0/\[маска сети\] был выбран маршрут, отличный от 0.0.0.0/0, хотя он попадает под маршрут по-умолчанию.
 > Маршрут по умолчанию имеет более низкий приоритет и срабатывает, когда не найден подходящий маршрут в таблице маршрутизации. 
 > 0.0.0.0/0 - это немаршрутизируемый адрес, который можно использовать в разных целях, в основном, в качестве адреса по умолчанию или адреса-заполнителя. Маршрут по умолчанию имеет более низкий приоритет и срабатывает, когда не найден подходящий маршрут в таблице маршрутизации. Для сети 10.10.0.0 мы создали правило, соответственно используется созданный маршрут. Также можно устанавливать метрику, чтобы менять приоритеты маршрутов.
@@ -424,10 +424,10 @@ default via 10.10.0.1 dev eth0
 > - ws11
 >   - `sudo apt install traceroute`(надо сначала закомментить gateway в netplan yaml-файле.)
 >   - `traceroute 10.20.0.10`
->   - ![part1](./images/5_task/traceroute_ws11.png)
+>   - ![part5](./images/5_task/traceroute_ws11.png)
 > - r1
 >   - `tcpdump -tnv -i eth0`
->   - ![part1](./images/5_task/tcpdump_r1.png)
+>   - ![part5](./images/5_task/tcpdump_r1.png)
 - В отчёте, опираясь на вывод, полученный из дампа на r1, объяснить принцип работы построения пути при помощи **traceroute**.
 
 > Принцип работы traceroute:
@@ -442,9 +442,9 @@ default via 10.10.0.1 dev eth0
 `ping -c 1 10.30.0.111`
 - В отчёт поместить скрин с вызовом и выводом использованных команд.
 > - ws1
->   - ![part1](./images/5_task/ws11_ping.png)
+>   - ![part5](./images/5_task/ws11_ping.png)
 > - r1
->   - ![part1](./images/5_task/r1_dump.png)
+>   - ![part5](./images/5_task/r1_dump.png)
 
 ##### Сохранить дампы образов виртуальных машин
 **p.s. Ни в коем случае не сохранять дампы в гит!**
@@ -469,39 +469,39 @@ subnet 10.20.0.0 netmask 255.255.255.192
 ```
 > - для начала скачаем isc-dhcp-server командой `sudo apt install isc-dhcp-server`(предварительно пошамнив с gateway)
 > - `sudo nano /etc/dhcp/dhcpd.conf`
->   - ![part1](./images/6_task/dhcp_r2.png)
+>   - ![part6](./images/6_task/dhcp_r2.png)
 ##### 2) в файле *resolv.conf* прописать `nameserver 8.8.8.8.`
 - В отчёт поместить скрины с содержанием изменённых файлов.
 > - `sudo nano /etc/resolv.conf`
->   - ![part1](./images/6_task/resolv_r2.png)
+>   - ![part6](./images/6_task/resolv_r2.png)
 ##### Перезагрузить службу **DHCP** командой `systemctl restart isc-dhcp-server`. Машину ws21 перезагрузить при помощи `reboot` и через `ip a` показать, что она получила адрес. Также пропинговать ws22 с ws21.
 - В отчёт поместить скрины с вызовом и выводом использованных команд.
 > - `systemctl restart isc-dhcp-server` 
->   - ![part1](./images/6_task/restart_dhcp_r2.png)
+>   - ![part6](./images/6_task/restart_dhcp_r2.png)
 > - `ip a`
->   - ![part1](./images/6_task/ipa_ws21.png)
+>   - ![part6](./images/6_task/ipa_ws21.png)
 > - `ping -c 5 10.20.0.2`
->   - ![part1](./images/6_task/pingws22.png)
+>   - ![part6](./images/6_task/pingws22.png)
 ##### Указать MAC адрес у ws11, для этого в *etc/netplan/00-installer-config.yaml* надо добавить строки: `macaddress: 10:10:10:10:10:BA`, `dhcp4: true`
->   - ![part1](./images/6_task/macws11.png)
+>   - ![part6](./images/6_task/macws11.png)
 - В отчёт поместить скрин с содержанием изменённого файла *etc/netplan/00-installer-config.yaml*.
 ##### Для r1 настроить аналогично r2, но сделать выдачу адресов с жесткой привязкой к MAC-адресу (ws11). Провести аналогичные тесты
 - В отчёте этот пункт описать аналогично настройке для r2.
 > - `sudo nano /etc/dhcp/dhcpd.conf`
->   - ![part1](./images/6_task/dhcpr1.png)
+>   - ![part6](./images/6_task/dhcpr1.png)
 > - `sudo nano /etc/resolv.conf`
->   - ![part1](./images/6_task/resolvr1.png)
+>   - ![part6](./images/6_task/resolvr1.png)
 > - `systemctl restart isc-dhcp-server` 
->   - ![part1](./images/6_task/sysr1.png)
+>   - ![part6](./images/6_task/sysr1.png)
 
 ##### Запросить с ws21 обновление ip адреса
 - В отчёте поместить скрины ip до и после обновления.
 > - "Убиваем" старый адрес `sudo dhclient -r enp0s8`
 > - Смотрим `ip a`
->   - ![part1](./images/6_task/ipa_ws111.png)
+>   - ![part6](./images/6_task/ipa_ws111.png)
 > - Запрашиваем новый IP `sudo dhclient enp0s8`
 > - Смотрим `ip a`
->   - ![part1](./images/6_task/ipa_ws112.png)
+>   - ![part6](./images/6_task/ipa_ws112.png)
 - В отчёте описать, какими опциями **DHCP** сервера пользовались в данном пункте.
 > Команда `sudo dhclient -r enp0s8` освобождает текущий адрес интерфейса enp0s8. Команда `sudo dhclient enp0s8` задает новый адрес указанному интерфейсу.
 
@@ -519,15 +519,15 @@ subnet 10.20.0.0 netmask 255.255.255.192
 - В отчёт поместить скрин с содержанием изменённого файла.
 - `sudo nano /etc/apache2/ports.conf`
 > - r1
->   - ![part1](./images/7_task/r1_apache.png)
+>   - ![part7](./images/7_task/r1_apache.png)
 > - ws22
->   - ![part1](./images/7_task/ws22_apache.png)
+>   - ![part7](./images/7_task/ws22_apache.png)
 ##### Запустить веб-сервер Apache командой `service apache2 start` на ws22 и r1
 - В отчёт поместить скрины с вызовом и выводом использованной команды.
 > - r1
->   - ![part1](./images/7_task/r1_apache_start.png)
+>   - ![part7](./images/7_task/r1_apache_start.png)
 > - ws22
->   - ![part1](./images/7_task/ws22_apache_start.png)
+>   - ![part7](./images/7_task/ws22_apache_start.png)
 ##### Добавить в фаервол, созданный по аналогии с фаерволом из Части 4, на r2 следующие правила:
 ##### 1) Удаление правил в таблице filter - `iptables -F`
 ##### 2) Удаление правил в таблице "NAT" - `iptables -F -t nat`
@@ -535,54 +535,81 @@ subnet 10.20.0.0 netmask 255.255.255.192
 ##### Запускать файл также, как в Части 4
 > - Создаем файл `sudo touch /etc/firewall.sh`
 > - Вносим необходимые команды `sudo nano /etc/firewall.sh`
->   - ![part1](./images/7_task/firewall.png)
+>   - ![part7](./images/7_task/firewall.png)
 > - Даем права на исполнение `sudo chmod +x /etc/firewall.sh`
 > - Запускаем `sudo sh /etc/firewall.sh`
 ##### Проверить соединение между ws22 и r1 командой `ping`
 *При запуске файла с этими правилами, ws22 не должна "пинговаться" с r1*
 - В отчёт поместить скрины с вызовом и выводом использованной команды.
->   - ![part1](./images/7_task/r1ws22_ping.png)
+>   - ![part7](./images/7_task/r1ws22_ping.png)
 ##### Добавить в файл ещё одно правило:
 ##### 4) Разрешить маршрутизацию всех пакетов протокола **ICMP**
 
 > - Вносим необходимые команды `sudo nano /etc/firewall.sh`
-> - ![part1](./images/7_task/firewall2.png)
+> - ![part7](./images/7_task/firewall2.png)
 > - Даем права на исполнение `sudo chmod +x /etc/firewall.sh`
 > - Запускаем `sudo sh /etc/firewall.sh`
 ##### Запускать файл также, как в Части 4
 ##### Проверить соединение между ws22 и r1 командой `ping`
 *При запуске файла с этими правилами, ws22 должна "пинговаться" с r1*
 - В отчёт поместить скрины с вызовом и выводом использованной команды.
->   - ![part1](./images/7_task/r1ws22_ping2.png)
+>   - ![part7](./images/7_task/r1ws22_ping2.png)
 ##### Добавить в файл ещё два правила:
 ##### 5) Включить **SNAT**, а именно маскирование всех локальных ip из локальной сети, находящейся за r2 (по обозначениям из Части 5 - сеть 10.20.0.0)
 *Совет: стоит подумать о маршрутизации внутренних пакетов, а также внешних пакетов с установленным соединением*
 ##### 6) Включить **DNAT** на 8080 порт машины r2 и добавить к веб-серверу Apache, запущенному на ws22, доступ извне сети
 *Совет: стоит учесть, что при попытке подключения возникнет новое tcp-соединение, предназначенное ws22 и 80 порту*
 - В отчёт поместить скрин с содержанием изменённого файла.
+> - Вносим необходимые команды `sudo nano /etc/firewall.sh`
+> - ![part7](./images/7_task/firewall3.png)
+> - Даем права на исполнение `sudo chmod +x /etc/firewall.sh`
+> - Запускаем `sudo sh /etc/firewall.sh`
 ##### Запускать файл также, как в Части 4
 *Перед тестированием рекомендуется отключить сетевой интерфейс **NAT** (его наличие можно проверить командой `ip a`) в VirtualBox, если он включен*
 ##### Проверить соединение по TCP для **SNAT**, для этого с ws22 подключиться к серверу Apache на r1 командой:
 `telnet [адрес] [порт]`
 ##### Проверить соединение по TCP для **DNAT**, для этого с r1 подключиться к серверу Apache на ws22 командой `telnet` (обращаться по адресу r2 и порту 8080)
 - В отчёт поместить скрины с вызовом и выводом использованных команд.
+> - Вносим необходимые команды `sudo telnet 10.100.0.11 80`
+> - ![part7](./images/7_task/ws22telnet.png)
+> - Вносим необходимые команды `sudo telnet 10.20.0.20 8080`
+> - ![part7](./images/7_task/r1telnet.png)
 
 ##### Сохранить дампы образов виртуальных машин
 **p.s. Ни в коем случае не сохранять дампы в гит!**
 
 ## Part 8. Дополнительно. Знакомство с **SSH Tunnels**
 
+> Про SSH Tunneling можно прочесть [здесь](https://habr.com/ru/post/331348/).
+
 **== Задание ==**
 
 *В данном задании используются виртуальные машины из Части 5*
 
 ##### Запустить на r2 фаервол с правилами из Части 7
+> - ![part8](./images/7_task/firewall3.png)
+> - Даем права на исполнение `sudo chmod +x /etc/firewall.sh`
+> - Запускаем `sudo sh /etc/firewall.sh`
 ##### Запустить веб-сервер **Apache** на ws22 только на localhost (то есть в файле */etc/apache2/ports.conf* изменить строку `Listen 80` на `Listen localhost:80`)
+> - ws22
+>   - ![part8](./images/8_task/apachews22.png)
 ##### Воспользоваться *Local TCP forwarding* с ws21 до ws22, чтобы получить доступ к веб-серверу на ws22 с ws21
+
 ##### Воспользоваться *Remote TCP forwarding* c ws11 до ws22, чтобы получить доступ к веб-серверу на ws22 с ws11
+
 ##### Для проверки, сработало ли подключение в обоих предыдущих пунктах, перейдите во второй терминал (например, клавишами Alt + F2) и выполните команду:
 `telnet 127.0.0.1 [локальный порт]`
 - В отчёте описать команды, необходимые для выполнения этих четырёх пунктов, а также приложить скриншоты с их вызовом и выводом.
+
+> - `ssh -L 8080:10.20.0.20:80 user-1@localhost`
+>   - ![part8](./images/8_task/ws21_ssh.png)
+> - `sudo telnet 127.0.0.1 8080`
+>   - ![part8](./images/8_task/telnet_ssh.png)
+
+> - `ssh -L 8080:10.20.0.20:80 user-1@localhost`
+>   - ![part8](./images/8_task/ws11_ssh.png)
+> - `sudo telnet 127.0.0.1 8080`
+>   - ![part8](./images/8_task/telnet_ws11.png)
 
 ##### Сохранить дампы образов виртуальных машин
 **p.s. Ни в коем случае не сохранять дампы в гит!**
