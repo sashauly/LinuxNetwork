@@ -591,8 +591,9 @@ subnet 10.20.0.0 netmask 255.255.255.192
 > - Даем права на исполнение `sudo chmod +x /etc/firewall.sh`
 > - Запускаем `sudo sh /etc/firewall.sh`
 ##### Запустить веб-сервер **Apache** на ws22 только на localhost (то есть в файле */etc/apache2/ports.conf* изменить строку `Listen 80` на `Listen localhost:80`)
-> - ws22
+> - `sudo nano /etc/apache2/ports.conf`
 >   - ![part8](./images/8_task/apachews22.png)
+> - `service apache2 start`
 ##### Воспользоваться *Local TCP forwarding* с ws21 до ws22, чтобы получить доступ к веб-серверу на ws22 с ws21
 
 ##### Воспользоваться *Remote TCP forwarding* c ws11 до ws22, чтобы получить доступ к веб-серверу на ws22 с ws11
